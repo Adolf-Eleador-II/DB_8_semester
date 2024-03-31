@@ -1,0 +1,97 @@
+# docker compose --env-file ./1.env config
+# docker compose build
+# docker compose up -d
+# docker compose down
+
+# docker compose exec php-cli bash
+# composer create-project laravel/laravel example-app
+# Переместить файлы из папки example-app на уровень выше
+# chmod 777 storage/ -R
+# exit
+
+# убедиться что везде всместо mysql стоит pgsql, а вместо 3306 стоит 5432 
+
+# docker compose exec php-fpm bash
+# php artisan migrate
+
+services:
+  nginx:
+      build:
+        context: ./docker/nginx
+        dockerfile: Dockerfile
+      volumes:
+      - ./:/var/www
+      environment:
+        - "DB_PORT=5432"
+        - "DB_HOST=postgres"
+        - "XDG_CONFIG_HOME=/app"
+      ports:
+      - "8080:80"
+      links:
+        - php-fpm
+        - node
+
+  php-fpm:
+      build:
+        context: ./docker/php-fpm
+        dockerfile: Dockerfile
+      volumes:
+        - ./:/var/www
+      environment:
+        - "DB_PORT=5432"
+        - "DB_HOST=postgres"
+        - "REDIS_PORT=6379"
+        - "REDIS_HOST=redis"
+      links:
+        - postgres
+        - node
+
+  php-cli:
+    build:
+      context: ./
+      dockerfile: docker/php-cli.docker
+    volumes:
+    - ./:/var/www
+    environment:
+      - "DB_PORT=5432"
+      - "DB_HOST=postgres"
+      - "COMPOSER_MEMORY_LIMIT=-1"
+    links:
+      - postgres
+    tty: true
+
+  postgres:
+    image: postgres:16.0-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db-vol:/var/lib/postgresql/data
+    environment:
+      - "POSTGRES_USER=alexey"
+      - "POSTGRES_PASSWORD=asdw123"
+      - "POSTGRES_DB=api"
+    expose:
+      - "5432"
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - 5433:80
+      - 5434:443
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=1@mail.ru"
+      - "PGADMIN_DEFAULT_PASSWORD=asdw123"
+
+  node:
+    image: node:18-alpine
+    ports:
+        - "3000:3000"
+    volumes:
+    - ./:/var/www
+    working_dir: /var/www
+    tty: true
+
+
+
+volumes:
+  boilerplate-db:
