@@ -5,7 +5,9 @@
 /public/storage
 /storage/*.key
 /vendor
+/db-vol
 .env
+1.env
 .env.backup
 .env.production
 .phpunit.result.cache

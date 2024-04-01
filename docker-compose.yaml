@@ -91,7 +91,5 @@ services:
     working_dir: /var/www
     tty: true
 
-
-
 volumes:
   boilerplate-db:
