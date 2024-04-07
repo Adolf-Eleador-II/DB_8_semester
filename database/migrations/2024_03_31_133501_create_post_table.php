@@ -13,30 +13,30 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idUser')->constrained('users')->comment('Создатель поста');
+            $table->foreignId('id_user')->constrained('users')->comment('Создатель поста');
             $table->text('content')->comment('Содержание поста');
-            $table->timestamp('dateCreate')->nullable()->comment('Дата создания поста');
-            $table->unsignedInteger('like')->comment('Количество лайков');
+            $table->timestamp('date_create')->default(\DB::raw('CURRENT_TIMESTAMP'))->comment('Дата создания поста');
+            $table->unsignedInteger('like')->default(0)->comment('Количество лайков');
         });
 
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idPost')->constrained('posts')->comment('Пост, к которому прикреплён комментарий');
-            $table->foreignId('idUser')->constrained('users')->comment('Создатель комментария');
-            $table->timestamp('dateCreate')->nullable()->comment('Дата создания комментария');
+            $table->foreignId('id_post')->constrained('posts')->comment('Пост, к которому прикреплён комментарий');
+            $table->foreignId('id_user')->constrained('users')->comment('Создатель комментария');
+            $table->timestamp('date_create')->default(\DB::raw('CURRENT_TIMESTAMP'))->nullable()->comment('Дата создания комментария');
             $table->text('content')->comment('Содержание комментария');
         });
 
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idParent')->constrained('tags')->comment('Обобщающий тег');
-            $table->string('name')->comment('Название тега');
+            $table->foreignId('id_parent')->nullable()->constrained('tags')->comment('Обобщающий тег');
+            $table->string('name')->nullable()->unique()->comment('Название тега');
         });
 
-        Schema::create('posts_tags', function (Blueprint $table) {
+        Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idTag')->constrained('tags')->comment('Тег');
-            $table->foreignId('idPost')->constrained('posts')->comment('Пост');
+            $table->foreignId('id_tag')->constrained('tags')->comment('Тег');
+            $table->foreignId('id_post')->constrained('posts')->comment('Пост');
         });
     }
 
@@ -45,7 +45,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts_tags');
+        Schema::dropIfExists('post_tag');
         Schema::dropIfExists('tags');
         Schema::dropIfExists('comments');
         Schema::dropIfExists('posts');

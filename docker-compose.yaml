@@ -3,7 +3,7 @@
 # docker compose --env-file ./1.env up -d
 # docker compose down
 
-# docker compose exec php-cli bash
+# docker compose --env-file ./1.env exec -u 0 php-cli bash
 # composer create-project laravel/laravel example-app
 # Переместить файлы из папки example-app на уровень выше
 # chmod 777 storage/ -R
@@ -11,8 +11,9 @@
 
 # убедиться что везде всместо mysql стоит pgsql, а вместо 3306 стоит 5432 
 
-# docker compose exec php-fpm bash
+# docker compose --env-file ./1.env exec php-fpm bash
 # php artisan migrate
+# php artisan migrate:rollback --step=9999
 
 services:
   nginx:
