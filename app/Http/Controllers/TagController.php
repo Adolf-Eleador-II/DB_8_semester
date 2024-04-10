@@ -9,7 +9,7 @@ class TagController extends Controller
 {
     public function index()
     {
-        return view('tags_list', [
+        return view('tags_index', [
             'tags' => Tag::all()
         ]);
     }
@@ -23,12 +23,21 @@ class TagController extends Controller
 
     public function create()
     {
-        //
+        return view('tag_create');
     }
 
     public function store(Request $request)
     {
-        //
+        $valideted = $request->validate([
+            'name' => 'required'
+        ]);
+
+        $tag=new Tag();
+        $tag->name=$valideted['name'];
+        if($valideted['id_parent']) $tag->id_parent=$valideted['id_parent'];
+        $tag->save();
+
+        return redirect('/posts');
     }
 
     public function edit(string $id)

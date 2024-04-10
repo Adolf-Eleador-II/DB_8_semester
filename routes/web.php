@@ -20,24 +20,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/tags',             [TagController::class, 'index' ]);
+Route::get('/tag/{id}',         [TagController::class, 'show'  ]);
+Route::get('/tag/{id}/create',  [TagController::class, 'create']);
+Route::post('/tag/{id}/store',  [TagController::class, 'store' ]);
+
+Route::get('/users',            [UserController::class, 'index'  ]);
+Route::get('/user/create',      [UserController::class, 'create' ]);
+Route::post('/user/store',      [UserController::class, 'store'  ]);
+Route::get('/user/{id}',        [UserController::class, 'show'   ]);
+Route::get('/user/{id}',        [UserController::class, 'show'   ]);
+Route::get('/user/{id}/edit',   [UserController::class, 'edit'   ]);
+Route::post('/user/{id}/update',[UserController::class, 'update' ]);
+Route::get('/user/{id}/destroy',[UserController::class, 'destroy']);
 
 
+Route::get('/posts',            [PostController::class, 'index'  ]);
+Route::get('/post/create',      [PostController::class, 'create' ]);
+Route::post('/post/store',      [PostController::class, 'store'  ]);
+Route::get('/post/{id}',        [PostController::class, 'show'   ]);
+Route::get('/post/{id}/edit',   [PostController::class, 'edit'   ]);
+Route::post('/post/{id}/update',[PostController::class, 'update' ]);
+Route::get('/post/{id}/destroy',[PostController::class, 'destroy']);
 
-Route::get('/users',     [UserController::class,    'index']);
-Route::get('/user/{id}', [UserController::class,    'show' ]);
-Route::get('/tags',      [TagController::class,     'index']);
-Route::get('/tag/{id}',  [TagController::class,     'show' ]);
-Route::get('/posts',     [PostController::class,    'index']);
-Route::get('/post/{id}', [PostController::class,    'show' ]);
-Route::get('/post/{id}/comments',  [CommentController::class, 'index']);
-
-
-
-// Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-// Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-
-// Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-// Route::get('/comments/{id}', [CommentController::class, 'show'])->name('comments.show');
-
-// Route::get('/tags', [TagController::class, 'index'])->name('tags.index');
-// Route::get('/tags/{id}', [TagController::class, 'show'])->name('tags.show');
+Route::get('/post/{id}/comments',                       [CommentController::class, 'index'  ]);
+Route::get('/post/{id}/comment/create',                 [CommentController::class, 'create' ]);
+Route::post('/post/{id}/comment/store',                 [CommentController::class, 'store'  ]);
+Route::get('/post/{id}/comment/{id_comment}/edit',      [CommentController::class, 'edit'   ]);
+Route::post('/post/{id}/comment/{id_comment}/update',   [CommentController::class, 'update' ]);
+Route::get('/post/{id}/comment/{id_comment}/destroy',   [CommentController::class, 'destroy']);
