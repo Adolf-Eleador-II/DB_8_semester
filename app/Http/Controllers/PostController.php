@@ -4,26 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('posts_index', [
-            'posts' => Post::all()
+        $perpage = $request->perpage??5;
+        return view('post/posts_index', [
+            'posts' => Post::paginate($perpage)->withQueryString()
         ]);
     }
 
     public function show(string $id)
     {
-        return view('post_show', [
+        return view('post/post_show', [
             'post' => Post::all()->where('id',$id)->first()
         ]);
     }
 
     public function create()
     {
-        return view('post_create');
+        return view('post/post_create');
     }
 
     public function store(Request $request)
@@ -42,7 +44,7 @@ class PostController extends Controller
 
     public function edit(string $id)
     {
-        return view('post_edit',[
+        return view('post/post_edit',[
             'post' => Post::all()->where('id',$id)->first()
         ]);
     }

@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     public function index(string $id_post)
     {
-        return view('comments_index', [
+        return view('comment/comments_index', [
             'comments' => Comment::all()->where('id_post',$id_post),
             'id_post' => $id_post
         ]);
@@ -22,7 +22,7 @@ class CommentController extends Controller
 
     public function create(string $id_post)
     {
-        return view('comment_create',[
+        return view('comment/comment_create',[
             'id_post' => $id_post
         ]);
     }
@@ -44,7 +44,7 @@ class CommentController extends Controller
 
     public function edit(string $id_post, string $id)
     {
-        return view('comment_create',[
+        return view('comment/comment_create',[
             'comment' => Comment::all()->where('id',$id)->first(),
             'id_post' => $id_post
         ]);

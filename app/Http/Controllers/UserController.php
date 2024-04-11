@@ -9,21 +9,21 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('users_index', [
+        return view('user/users_index', [
             'users' => User::all()
         ]);
     }
 
     public function show(string $id)
     {
-        return view('user_show', [
+        return view('user/user_show', [
             'user' => User::all()->where('id',$id)->first()   
         ]);
     }
 
     public function create()
     {
-        return view('user_create');
+        return view('user/user_create');
     }
 
     public function store(Request $request)
@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        return view('user_edit',[
+        return view('user/user_edit',[
             'user' =>User::all()->where('id',$id)->first()
         ]);
     }

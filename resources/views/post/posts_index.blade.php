@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CH_AS 609-01</title>
+    {{-- @vite('resources/css/app.css') --}}
 </head>
 <body>
     <p>
@@ -39,5 +40,6 @@
         </tr>
     @endforeach
     </table>
+    <p>{{$posts->links()}}</p>
 </body>
 </html>

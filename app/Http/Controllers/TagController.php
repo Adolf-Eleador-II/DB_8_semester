@@ -9,21 +9,21 @@ class TagController extends Controller
 {
     public function index()
     {
-        return view('tags_index', [
+        return view('tag/tags_index', [
             'tags' => Tag::all()
         ]);
     }
 
     public function show(string $id)
     {
-        return view('tag_show', [
+        return view('tag/tag_show', [
             'tag' => Tag::all()->where('id',$id)->first()
         ]);
     }
 
     public function create()
     {
-        return view('tag_create');
+        return view('tag/tag_create');
     }
 
     public function store(Request $request)
