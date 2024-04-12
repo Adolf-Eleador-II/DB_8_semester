@@ -13,7 +13,7 @@
 
 # docker compose --env-file ./1.env exec php-fpm bash
 # php artisan migrate
-# php artisan migrate:rollback --step=9999
+# php artisan migrate:rollback --step=9999 && php artisan migrate
 
 services:
   nginx:

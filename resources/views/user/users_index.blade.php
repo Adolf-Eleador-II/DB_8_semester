@@ -12,7 +12,6 @@
         <a href="{{url('/tags')}}">Тегов</a>
     </p>
     <h2>Список users:</h2>
-    <a href="{{url('user/create')}}">Создать пользователя</a>
     <p></p>
     <table border="1">
         <thread>

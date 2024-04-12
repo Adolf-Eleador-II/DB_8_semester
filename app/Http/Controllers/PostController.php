@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -64,6 +65,9 @@ class PostController extends Controller
 
     public function destroy(string $id)
     {
+        if(!Gate::allows('destroy-post', Post::all()->where('id',$id)->first())){
+            return redirect('/error')->with('message', 'Вы не можете удалить чужой пост');
+        }
         Post::destroy($id);
         return redirect('/posts');
     }
