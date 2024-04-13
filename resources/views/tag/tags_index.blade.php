@@ -1,18 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CH_AS 609-01</title>
-</head>
-<body>
-    <p>
-        Список всех: 
-        <a href="{{url('/users')}}">Пользователей</a>
-        <a href="{{url('/posts')}}">Постов</a>
-        <a href="{{url('/tags')}}">Тегов</a>
-    </p>
-    <h2>Список tags:</h2>
-    <table border="1">
+@extends('layout')
+@section('content')
+    <h2>Список тегов:</h2>
+    <table border="1" class="table table-striped">
         <thread>
             <td>id</td>
             <td>Наименование</td>
@@ -26,5 +15,4 @@
         </tr>
     @endforeach
     </table>
-</body>
-</html>
+@endsection

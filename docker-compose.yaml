@@ -11,7 +11,7 @@
 
 # убедиться что везде всместо mysql стоит pgsql, а вместо 3306 стоит 5432 
 
-# docker compose --env-file ./1.env exec php-fpm bash
+# docker compose --env-file ./1.env exec -u 0 php-cli bash
 # php artisan migrate
 # php artisan migrate:rollback --step=9999 && php artisan migrate
 

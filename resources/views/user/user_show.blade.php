@@ -1,23 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CH_AS 609-01</title>
-</head>
-<body>
-    <p>
-        Список всех: 
-        <a href="{{url('/users')}}">Пользователей</a>
-        <a href="{{url('/posts')}}">Постов</a>
-        <a href="{{url('/tags')}}">Тегов</a>
-    </p>
+@extends('layout')
+@section('content')
     <h2>{{$user ? "Пользователь ".$user->name : "Неверный id пользователя"}}</h2>
     @if($user)
         <p>id: {{$user->id}}</p>
         <p>имя: {{$user->name}}</p>
         <p>email: {{$user->email}}</p>
         
-        <table border="1">
+        <table border="1" class="table table-striped">
             Список созданных постов:
             <thread>
                 <td>id</td>
@@ -35,7 +24,7 @@
         @endforeach
         </table>
         <p></p>
-        <table border="1">
+        <table border="1" class="table table-striped">
             Список созданных комментариев:
             <thread>
                 <td>id</td>
@@ -53,5 +42,4 @@
         @endforeach
         </table>
     @endif
-</body>
-</html>
+@endsection

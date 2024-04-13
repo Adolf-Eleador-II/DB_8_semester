@@ -7,20 +7,10 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('posts');
 });
+
 Route::get('/tags',             [TagController::class, 'index' ]);
 Route::get('/tag/{id}',         [TagController::class, 'show'  ]);
 Route::get('/tag/{id}/create',  [TagController::class, 'create'])->middleware('auth');
@@ -34,7 +24,6 @@ Route::get('/user/{id}',        [UserController::class, 'show'   ]);
 Route::get('/user/{id}/edit',   [UserController::class, 'edit'   ]);
 Route::post('/user/{id}/update',[UserController::class, 'update' ]);
 Route::get('/user/{id}/destroy',[UserController::class, 'destroy']);
-
 
 Route::get('/posts',            [PostController::class, 'index'  ]);
 Route::get('/post/create',      [PostController::class, 'create' ])->middleware('auth');

@@ -1,23 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CH_AS 609-01</title>
-    <style> .is-invalid { color: red; } </style>
-</head>
-<body>
+@extends('layout')
+@section('content')
     <h2>Редактирование комментария</h2>
     <form method="post" action="{{url('post/'.$id_post.'/comment/update')}}">
         @csrf
         
         <label>Содержание</label>
-        <input type="text" name="content" value="@if (old('content')) {{ old('content')}} @else {{$comment->content}} @endif"/>
+        <input type="text" name="content" value="@if (old('content')) {{old('content')}} @else {{$comment->content}} @endif"/>
         @error('content')
-        <div class="is-invalid">{{ $message }}</div>
+        <div style="color: red;">{{$message}}</div>
         @enderror
         <p></p>
 
-        <input type="submit"/>
+        <input class="btn btn-primary" type="submit" value="Изменить">
     </form>
-</body>
-</html>
+@endsection

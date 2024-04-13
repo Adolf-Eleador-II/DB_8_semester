@@ -18,7 +18,7 @@ class Tag extends Model
         return $this->belongsTo(Tag::class, 'id_parent');
     }
     public function tags(){
-        return $this->hasMany(tag::class, 'id_parent');
+        return $this->hasMany(Tag::class, 'id_parent');
     }
 }
 

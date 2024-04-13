@@ -1,10 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CH_AS 609-01</title>
-</head>
-<body>
+@extends('layout')
+@section('content')
     <p>
         Список всех: 
         <a href="{{url('/users')}}">Пользователей</a>
@@ -18,7 +13,7 @@
             <p>Лайки: {{$post->like}}</p>
             <p>Дата создания: {{$post->created_at}}</p>
 
-    <table border="1">
+    <table border="1" class="table table-striped">
         Tags list:
         <thread>
             <td>id</td>
@@ -32,7 +27,7 @@
         @endforeach
     </table>
     <p></p>
-    <table border="1">
+    <table border="1" class="table table-striped">
         Comments list: 
         <a href="{{url('post/'.$post->id.'/comments')}}">Подробнее {{count($post->comments)}} комментария</a>
         <thread>
@@ -58,3 +53,4 @@
     @endif
 </body>
 </html>
+@endsection
